@@ -84,9 +84,37 @@ Languages: French (primary), English
 - [x] System prompt version controlled (`prompts/sophie-system-prompt.md`)
 - [x] Documentation complete
 - [ ] Phone number configured (via VAPI dashboard)
-- [ ] Lead capture webhook endpoint configured (currently placeholder)
+- [x] Lead capture webhook endpoint configured
 - [ ] End-to-end call testing completed
 - [ ] Softvoyage CRM integration tested
+
+## Supabase Integration
+
+- **Project ID**: `glzubknrxftcwzfetzit`
+- **Project URL**: `https://glzubknrxftcwzfetzit.supabase.co`
+- **Lead Capture Webhook**: `https://glzubknrxftcwzfetzit.supabase.co/functions/v1/capture-lead`
+
+### Tables
+- `leads` - Captured lead information (name, phone, destination, trip_type, budget, etc.)
+- `appointments` - Booked consultation appointments
+
+### Edge Functions
+- `capture-lead` - Webhook endpoint for VAPI lead capture tool
+
+### VAPI Tool Update Required
+Update the Lead Capture tool (`9b790a08-c535-40f8-a243-bb2c7e63e3b9`) server URL to:
+```
+https://glzubknrxftcwzfetzit.supabase.co/functions/v1/capture-lead
+```
+
+## Demo Web App
+
+- **URL**: `https://demo-n16wfinu1-qualiasolutionscy.vercel.app`
+- **Team**: Qualia Solutions CY
+- **Pages**:
+  - `/` - Voice agent demo
+  - `/leads` - Lead dashboard with real-time updates
+  - `/calendar` - Appointment calendar (week/list views)
 
 ## Project Structure
 
@@ -94,6 +122,16 @@ Languages: French (primary), English
 voice/
 ├── access/
 │   └── proposal.html      # Client proposal (Acces Voyages)
+├── demo/                  # Next.js demo web app
+│   ├── app/
+│   │   ├── api/webhook/   # API routes (backup)
+│   │   ├── calendar/      # Appointment calendar page
+│   │   ├── components/    # VoiceAgent component
+│   │   ├── leads/         # Leads dashboard page
+│   │   ├── lib/           # Supabase client
+│   │   └── page.tsx       # Main demo page
+│   ├── package.json
+│   └── vercel.json
 ├── prompts/
 │   └── sophie-system-prompt.md  # Version-controlled system prompt
 ├── .env.example           # Environment variable template

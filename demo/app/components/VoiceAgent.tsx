@@ -77,96 +77,120 @@ export default function VoiceAgent() {
   const getStatusText = () => {
     switch (status) {
       case 'connecting': return 'Connexion...';
-      case 'active': return isSpeaking ? 'Sophie parle...' : 'En appel';
+      case 'active': return isSpeaking ? 'En écoute...' : 'En appel';
       case 'ending': return 'Fin d\'appel...';
       default: return 'Prêt';
     }
   };
 
-  const getButtonText = () => {
-    switch (status) {
-      case 'connecting': return 'Connexion...';
-      case 'active': return 'Terminer l\'appel';
-      case 'ending': return 'Fin...';
-      default: return 'Parler avec Sophie';
-    }
-  };
-
   if (!VAPI_PUBLIC_KEY) {
     return (
-      <div className="text-center p-8">
-        <p className="text-zinc-500">Configuration en cours...</p>
-        <p className="text-sm text-zinc-400 mt-2">VAPI_PUBLIC_KEY non configuré</p>
+      <div className="flex-1 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+          </div>
+          <p className="text-slate-500 text-sm">Configuration en cours...</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      {/* Status indicator */}
-      <div className="flex items-center gap-3">
-        <div className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-          status === 'active'
-            ? isSpeaking
-              ? 'bg-cyan-400 animate-pulse'
-              : 'bg-green-400'
-            : status === 'connecting' || status === 'ending'
-              ? 'bg-yellow-400 animate-pulse'
-              : 'bg-zinc-300'
-        }`} />
-        <span className="text-sm text-zinc-500 font-medium">{getStatusText()}</span>
+    <div className="flex-1 flex flex-col items-center justify-center gap-6">
+      {/* Call button - smaller and teal themed */}
+      <div className="relative">
+        <button
+          onClick={status === 'active' ? endCall : startCall}
+          disabled={status === 'connecting' || status === 'ending'}
+          className={`
+            relative w-20 h-20 md:w-24 md:h-24 rounded-full transition-all duration-300 ease-out
+            flex items-center justify-center
+            ${status === 'active'
+              ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/20'
+              : status === 'connecting' || status === 'ending'
+                ? 'bg-slate-200 cursor-not-allowed'
+                : 'bg-teal-500 hover:bg-teal-600 shadow-lg shadow-teal-500/20 hover:shadow-xl hover:shadow-teal-500/25 hover:scale-105 active:scale-95'
+            }
+            disabled:opacity-50 disabled:cursor-not-allowed
+          `}
+        >
+          {status === 'active' ? (
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-8 h-8 md:w-10 md:h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          )}
+
+          {/* Ripple effect for active call */}
+          {status === 'active' && isSpeaking && (
+            <>
+              <span className="absolute w-full h-full rounded-full bg-teal-400/30 animate-ping" />
+              <span className="absolute w-[130%] h-[130%] rounded-full bg-teal-400/15 animate-pulse" />
+            </>
+          )}
+        </button>
       </div>
 
-      {/* Call button */}
-      <button
-        onClick={status === 'active' ? endCall : startCall}
-        disabled={status === 'connecting' || status === 'ending'}
-        className={`
-          relative w-32 h-32 rounded-full transition-all duration-300 ease-out
-          flex items-center justify-center
-          ${status === 'active'
-            ? 'bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/25'
+      {/* Status */}
+      <div className="flex items-center gap-2">
+        <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+          status === 'active'
+            ? isSpeaking
+              ? 'bg-teal-400 animate-pulse'
+              : 'bg-green-400'
             : status === 'connecting' || status === 'ending'
-              ? 'bg-zinc-300 cursor-not-allowed'
-              : 'bg-gradient-to-br from-cyan-400 to-cyan-600 hover:from-cyan-500 hover:to-cyan-700 shadow-lg shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-500/30 hover:scale-105'
-          }
-          disabled:opacity-50 disabled:cursor-not-allowed
-        `}
-      >
-        {status === 'active' ? (
-          <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-          </svg>
-        )}
+              ? 'bg-amber-400 animate-pulse'
+              : 'bg-slate-300'
+        }`} />
+        <span className="text-sm text-slate-500 font-medium">{getStatusText()}</span>
+      </div>
 
-        {/* Ripple effect for active call */}
-        {status === 'active' && isSpeaking && (
-          <>
-            <span className="absolute w-full h-full rounded-full bg-cyan-400/30 animate-ping" />
-            <span className="absolute w-[120%] h-[120%] rounded-full bg-cyan-400/20 animate-pulse" />
-          </>
-        )}
-      </button>
+      {/* Transcript container - navy framed */}
+      <div className="w-full max-w-sm">
+        <div className="rounded-xl border-2 border-slate-800 bg-slate-50/50 overflow-hidden">
+          <div className="bg-slate-800 px-4 py-2">
+            <p className="text-xs text-slate-300 uppercase tracking-wider font-medium">Transcription</p>
+          </div>
+          <div className="p-4 min-h-[120px] max-h-[160px] overflow-y-auto">
+            {transcript.length > 0 ? (
+              <div className="space-y-2">
+                {transcript.slice(-6).map((line, i) => {
+                  const isAssistant = line.toLowerCase().startsWith('assistant:');
+                  const isUser = line.toLowerCase().startsWith('user:');
+                  const content = line.replace(/^(assistant|user):\s*/i, '');
 
-      <p className="text-lg font-medium text-zinc-700">
-        {getButtonText()}
-      </p>
-
-      {/* Transcript preview */}
-      {transcript.length > 0 && (
-        <div className="w-full max-w-md mt-4 p-4 bg-zinc-50 rounded-lg border border-zinc-100">
-          <p className="text-xs text-zinc-400 uppercase tracking-wider mb-2">Transcription</p>
-          <div className="space-y-1 max-h-32 overflow-y-auto">
-            {transcript.slice(-5).map((line, i) => (
-              <p key={i} className="text-sm text-zinc-600">{line}</p>
-            ))}
+                  return (
+                    <div
+                      key={i}
+                      className={`text-sm leading-relaxed ${
+                        isAssistant
+                          ? 'text-teal-700'
+                          : isUser
+                            ? 'text-slate-700'
+                            : 'text-slate-600'
+                      }`}
+                    >
+                      {isAssistant && <span className="text-teal-500 font-medium text-xs mr-1">AI:</span>}
+                      {isUser && <span className="text-slate-400 font-medium text-xs mr-1">Vous:</span>}
+                      {content}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-sm text-slate-400 text-center py-8">
+                La transcription apparaîtra ici...
+              </p>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

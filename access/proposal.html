@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qualia Solutions - Bilingual Voice AI Agent Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0a0a;
+            --secondary: #1a1a1a;
+            --accent: #00d4ff;
+            --accent-purple: #8b5cf6;
+            --text: #ffffff;
+            --text-muted: #a0a0a0;
+            --border: #2a2a2a;
+            --success: #22c55e;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .header .client {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--secondary);
+            display: inline-block;
+        }
+
+        .header .client span {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .header .client a {
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        /* Company Profile */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        .profile-card {
+            background: var(--secondary);
+            padding: 30px;
+            border: 1px solid var(--border);
+        }
+
+        .profile-card h3 {
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .profile-card p {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .profile-card ul {
+            list-style: none;
+        }
+
+        .profile-card li {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 5px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .profile-card li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Pain Points Table */
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--secondary);
+        }
+
+        th {
+            background: var(--primary);
+            padding: 20px;
+            text-align: left;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            border: 1px solid var(--border);
+        }
+
+        td {
+            padding: 20px;
+            border: 1px solid var(--border);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        td:first-child {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Solutions */
+        .solution {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .solution-header {
+            display: flex;
+            align-items: center;
+            padding: 30px;
+            border-bottom: 1px solid var(--border);
+            gap: 20px;
+        }
+
+        .solution-number {
+            font-size: 48px;
+            font-weight: 200;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .solution-title {
+            flex: 1;
+        }
+
+        .solution-title h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+
+        .solution-title .tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--primary);
+            color: var(--accent);
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .solution-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .solution-col {
+            padding: 30px;
+        }
+
+        .solution-col:first-child {
+            border-right: 1px solid var(--border);
+        }
+
+        .solution-col h4 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .solution-col ul {
+            list-style: none;
+        }
+
+        .solution-col li {
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .solution-col li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Workflow Box */
+        .workflow-box {
+            background: var(--primary);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .workflow-box h5 {
+            color: var(--accent);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .workflow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .workflow-step {
+            background: var(--secondary);
+            padding: 8px 15px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .workflow-arrow {
+            color: var(--accent);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 30px;
+            background: var(--primary);
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 200;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* ROI Table */
+        .roi-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .roi-table th,
+        .roi-table td {
+            padding: 20px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .roi-table th {
+            background: var(--primary);
+        }
+
+        .roi-table tfoot td {
+            background: var(--primary);
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .roi-table tfoot td:last-child {
+            color: var(--success);
+        }
+
+        /* Roadmap */
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .roadmap-phase {
+            background: var(--secondary);
+            border: 1px solid var(--border);
+        }
+
+        .roadmap-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .phase-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .phase-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .phase-info span {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .roadmap-body {
+            padding: 20px;
+        }
+
+        .roadmap-body li {
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 5px 0;
+            list-style: none;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .roadmap-body li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Why Qualia */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+
+        .why-item {
+            background: var(--secondary);
+            padding: 25px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .why-number {
+            font-size: 36px;
+            font-weight: 200;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .why-item h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .why-item p {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Next Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step-item {
+            background: var(--secondary);
+            padding: 30px;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .step-number {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 48px;
+            font-weight: 200;
+            color: var(--border);
+        }
+
+        .step-item h4 {
+            color: var(--accent);
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .step-item p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Sources */
+        .sources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .source-tag {
+            background: var(--secondary);
+            padding: 8px 15px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+        }
+
+        .footer-logo {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .footer-tagline {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .footer-contact {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-contact a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .profile-grid,
+            .roadmap,
+            .why-grid,
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-grid,
+            .roadmap,
+            .why-grid,
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-body {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-col:first-child {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">QUALIA SOLUTIONS</div>
+            <h1>Bilingual Voice AI Agent</h1>
+            <p class="subtitle">December 2025 | Voice AI Proposal</p>
+            <div class="client">
+                <span>Prepared for</span>
+                <strong>Acces Croisieres et Voyages</strong>
+                <a href="https://accesvoyages.ca" target="_blank">accesvoyages.ca</a>
+            </div>
+        </header>
+
+        <!-- Company Profile -->
+        <section class="section">
+            <h2 class="section-title"><span>01</span> Company Profile</h2>
+            <div class="profile-grid">
+                <div class="profile-card">
+                    <h3>ABOUT</h3>
+                    <p><strong>Location:</strong> Quebec, Canada</p>
+                    <p><strong>Languages:</strong> French (primary), English</p>
+                    <p><strong>Phone:</strong> 450-692-4110 / 1-866-692-4110</p>
+                    <p><strong>Backend:</strong> Softvoyage</p>
+                </div>
+                <div class="profile-card">
+                    <h3>SERVICES</h3>
+                    <ul>
+                        <li>Custom travel packages & vacation planning</li>
+                        <li>Cruise & river cruise bookings</li>
+                        <li>All-inclusive resort packages</li>
+                        <li>Golf travel specializations</li>
+                        <li>Wedding & honeymoon planning</li>
+                        <li>E-tickets & travel insurance</li>
+                    </ul>
+                </div>
+                <div class="profile-card">
+                    <h3>TARGET MARKET</h3>
+                    <p>French-speaking Canadians seeking Caribbean, Mediterranean, and international destinations including Cuba, Dominican Republic, Mexico, Europe, and Morocco.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pain Points -->
+        <section class="section">
+            <h2 class="section-title"><span>02</span> Identified Pain Points & Opportunities</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>PAIN POINT</th>
+                            <th>CURRENT STATE</th>
+                            <th>AI SOLUTION POTENTIAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>After-hours inquiries</td>
+                            <td>Missed calls and leads</td>
+                            <td>24/7 Voice AI Agent</td>
+                        </tr>
+                        <tr>
+                            <td>Quote generation</td>
+                            <td>Manual, time-consuming</td>
+                            <td>Automated quote builder</td>
+                        </tr>
+                        <tr>
+                            <td>Lead qualification</td>
+                            <td>Agent time wasted on unqualified leads</td>
+                            <td>AI pre-qualification</td>
+                        </tr>
+                        <tr>
+                            <td>Multi-channel management</td>
+                            <td>FB, Instagram, email, phone scattered</td>
+                            <td>Unified AI inbox</td>
+                        </tr>
+                        <tr>
+                            <td>Booking confirmations</td>
+                            <td>Manual follow-ups</td>
+                            <td>Automated workflows</td>
+                        </tr>
+                        <tr>
+                            <td>Personalized recommendations</td>
+                            <td>Relies on agent memory</td>
+                            <td>AI-powered matching</td>
+                        </tr>
+                        <tr>
+                            <td>Language barriers</td>
+                            <td>Bilingual staff required 24/7</td>
+                            <td>Multilingual AI</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Solutions -->
+        <section class="section">
+            <h2 class="section-title"><span>03</span> Proposed Solution: Bilingual Voice AI Agent</h2>
+
+            <!-- Solution 01 -->
+            <div class="solution">
+                <div class="solution-header">
+                    <div class="solution-number">01</div>
+                    <div class="solution-title">
+                        <h3>Bilingual Voice AI Agent</h3>
+                        <span class="tag">VAPI</span>
+                    </div>
+                </div>
+                <p style="padding: 20px 30px; color: var(--text-muted); border-bottom: 1px solid var(--border);">
+                    Handles inbound calls 24/7 in French and English
+                </p>
+                <div class="solution-body">
+                    <div class="solution-col">
+                        <h4>CAPABILITIES</h4>
+                        <ul>
+                            <li>Answer common questions (destinations, pricing ranges, availability)</li>
+                            <li>Collect lead information (name, travel dates, preferences, budget)</li>
+                            <li>Qualify leads based on criteria (trip type, timeline, budget tier)</li>
+                            <li>Book consultation appointments with human agents</li>
+                            <li>Transfer hot leads to available agents in real-time</li>
+                            <li>Send SMS confirmations with agent details</li>
+                        </ul>
+                    </div>
+                    <div class="solution-col">
+                        <h4>BUSINESS IMPACT</h4>
+                        <ul>
+                            <li>Capture 100% of after-hours inquiries (currently lost)</li>
+                            <li>Reduce agent time on initial qualification by 70%</li>
+                            <li>Sub-600ms response times feel natural to callers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ROI Projection -->
+        <section class="section">
+            <h2 class="section-title"><span>04</span> ROI Projection</h2>
+            <div class="table-container">
+                <table class="roi-table">
+                    <thead>
+                        <tr>
+                            <th>SOLUTION</th>
+                            <th>MONTHLY COST</th>
+                            <th>HOURS SAVED/MONTH</th>
+                            <th>REVENUE IMPACT</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Voice AI Agent</td>
+                            <td>$500-800</td>
+                            <td>80+ hours</td>
+                            <td>Capture 20+ leads/month</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>$500-800/month</strong></td>
+                            <td><strong>80+ hours/month</strong></td>
+                            <td><strong>5-10x ROI within 6 months</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <!-- Implementation Roadmap -->
+        <section class="section">
+            <h2 class="section-title"><span>05</span> Implementation Roadmap</h2>
+            <div class="roadmap">
+                <div class="roadmap-phase">
+                    <div class="roadmap-header">
+                        <div class="phase-number">1</div>
+                        <div class="phase-info">
+                            <h4>Discovery</h4>
+                            <span>Week 1</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-body">
+                        <ul>
+                            <li>Define lead qualification criteria with Acces Voyages team</li>
+                            <li>Configure bilingual knowledge base (FR/EN)</li>
+                            <li>Set up VAPI account and phone number</li>
+                            <li>Document common caller questions and responses</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="roadmap-header">
+                        <div class="phase-number">2</div>
+                        <div class="phase-info">
+                            <h4>Development</h4>
+                            <span>Week 2</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-body">
+                        <ul>
+                            <li>Build VAPI voice agent with call flows</li>
+                            <li>Configure lead capture and qualification logic</li>
+                            <li>Set up SMS confirmation tool</li>
+                            <li>Implement call transfer to human agents</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="roadmap-header">
+                        <div class="phase-number">3</div>
+                        <div class="phase-info">
+                            <h4>Testing</h4>
+                            <span>Week 3</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-body">
+                        <ul>
+                            <li>Internal testing with sample calls</li>
+                            <li>Train staff on handoff procedures</li>
+                            <li>Refine responses based on feedback</li>
+                            <li>Deploy for after-hours calls only</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roadmap-phase">
+                    <div class="roadmap-header">
+                        <div class="phase-number">4</div>
+                        <div class="phase-info">
+                            <h4>Launch & Optimize</h4>
+                            <span>Ongoing</span>
+                        </div>
+                    </div>
+                    <div class="roadmap-body">
+                        <ul>
+                            <li>Full deployment for all inbound calls</li>
+                            <li>Analyze conversation logs for improvements</li>
+                            <li>Expand knowledge base as needed</li>
+                            <li>Monthly performance reviews</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Qualia Solutions -->
+        <section class="section">
+            <h2 class="section-title"><span>06</span> Why Qualia Solutions</h2>
+            <div class="why-grid">
+                <div class="why-item">
+                    <div class="why-number">1</div>
+                    <h4>VAPI Expertise</h4>
+                    <p>Production-ready voice AI platform integration</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-number">2</div>
+                    <h4>Bilingual AI</h4>
+                    <p>Experience with French-Canadian market</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-number">3</div>
+                    <h4>Travel Industry</h4>
+                    <p>Understanding of booking flows and customer journeys</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-number">4</div>
+                    <h4>Fast Deployment</h4>
+                    <p>3-week implementation timeline</p>
+                </div>
+                <div class="why-item">
+                    <div class="why-number">5</div>
+                    <h4>Ongoing Support</h4>
+                    <p>Monthly optimization and knowledge base updates</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="section">
+            <h2 class="section-title"><span>07</span> Next Steps</h2>
+            <div class="steps-grid">
+                <div class="step-item">
+                    <span class="step-number">1</span>
+                    <h4>DISCOVERY CALL</h4>
+                    <p>30-minute intro with Acces Voyages team</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">2</span>
+                    <h4>TECHNICAL AUDIT</h4>
+                    <p>Review Softvoyage API capabilities</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">3</span>
+                    <h4>PILOT PROPOSAL</h4>
+                    <p>Start with Voice AI + basic automations</p>
+                </div>
+                <div class="step-item">
+                    <span class="step-number">4</span>
+                    <h4>SCALE PLAN</h4>
+                    <p>Expand based on initial results</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sources -->
+        <section class="section">
+            <h2 class="section-title"><span>08</span> Sources</h2>
+            <div class="sources">
+                <span class="source-tag">VAPI Voice AI</span>
+                <span class="source-tag">Retell AI Travel & Hospitality</span>
+                <span class="source-tag">Travel Agency Voice AI Trends</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-logo">QUALIA SOLUTIONS</div>
+            <p class="footer-tagline">AI Agents & Automation</p>
+            <p class="footer-contact">
+                Contact: <a href="mailto:info@qualiasolutions.net">info@qualiasolutions.net</a><br>
+                Website: <a href="https://qualiasolutions.net" target="_blank">qualiasolutions.net</a>
+            </p>
+            <p class="footer-note">Confidential Proposal — December 2025</p>
+        </footer>
+    </div>
+</body>
+</html>

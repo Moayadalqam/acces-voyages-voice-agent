@@ -85,59 +85,59 @@ export default function LeadsPage() {
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <header className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-6">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3 sm:gap-6">
             <Image
               src="https://images.squarespace-cdn.com/content/v1/65bf52f873aac538961445c5/19d16cc5-aa83-437c-9c2a-61de5268d5bf/Untitled+design+-+2025-01-19T070746.544.png?format=1500w"
               alt="Qualia Solutions"
-              width={100}
-              height={33}
-              className="object-contain"
+              width={80}
+              height={27}
+              className="object-contain sm:w-[100px]"
             />
-            <nav className="flex gap-1">
-              <Link href="/" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+            <nav className="flex gap-0.5 sm:gap-1">
+              <Link href="/" className="px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
                 Demo
               </Link>
-              <Link href="/leads" className="px-4 py-2 text-sm bg-teal-50 text-teal-700 font-medium rounded-lg">
+              <Link href="/leads" className="px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm bg-teal-50 text-teal-700 font-medium rounded-lg">
                 Leads
               </Link>
-              <Link href="/calendar" className="px-4 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+              <Link href="/calendar" className="px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
                 Calendrier
               </Link>
             </nav>
           </div>
-          <p className="text-xs text-slate-400">Accès Croisières et Voyages</p>
+          <p className="text-xs text-slate-400 hidden sm:block">Accès Croisières et Voyages</p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Stats */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-xl border border-slate-200 p-4">
-            <p className="text-2xl font-semibold text-slate-800">{stats.total}</p>
-            <p className="text-sm text-slate-500">Total Leads</p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 mb-4 sm:mb-8">
+          <div className="bg-white rounded-xl border border-slate-200 p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-semibold text-slate-800">{stats.total}</p>
+            <p className="text-xs sm:text-sm text-slate-500">Total Leads</p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-200 p-4">
-            <p className="text-2xl font-semibold text-teal-600">{stats.new}</p>
-            <p className="text-sm text-slate-500">Nouveaux</p>
+          <div className="bg-white rounded-xl border border-slate-200 p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-semibold text-teal-600">{stats.new}</p>
+            <p className="text-xs sm:text-sm text-slate-500">Nouveaux</p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-200 p-4">
-            <p className="text-2xl font-semibold text-blue-600">{stats.contacted}</p>
-            <p className="text-sm text-slate-500">Contactés</p>
+          <div className="bg-white rounded-xl border border-slate-200 p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-semibold text-blue-600">{stats.contacted}</p>
+            <p className="text-xs sm:text-sm text-slate-500">Contactés</p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-200 p-4">
-            <p className="text-2xl font-semibold text-green-600">{stats.converted}</p>
-            <p className="text-sm text-slate-500">Convertis</p>
+          <div className="bg-white rounded-xl border border-slate-200 p-3 sm:p-4">
+            <p className="text-xl sm:text-2xl font-semibold text-green-600">{stats.converted}</p>
+            <p className="text-xs sm:text-sm text-slate-500">Convertis</p>
           </div>
         </div>
 
         {/* Filter */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-1.5 sm:gap-2 mb-4 sm:mb-6 overflow-x-auto pb-2 -mx-3 px-3 sm:mx-0 sm:px-0">
           {['all', 'new', 'contacted', 'qualified', 'converted', 'lost'].map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`px-4 py-2 text-sm rounded-lg transition-colors ${
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm rounded-lg transition-colors whitespace-nowrap flex-shrink-0 ${
                 filter === status
                   ? 'bg-slate-800 text-white'
                   : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -150,26 +150,26 @@ export default function LeadsPage() {
 
         {/* Leads Table */}
         <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-          <div className="bg-slate-800 px-6 py-3">
-            <h2 className="text-sm font-medium text-white uppercase tracking-wider">
+          <div className="bg-slate-800 px-4 sm:px-6 py-3">
+            <h2 className="text-xs sm:text-sm font-medium text-white uppercase tracking-wider">
               Leads Capturés ({filteredLeads.length})
             </h2>
           </div>
 
           {loading ? (
-            <div className="p-12 text-center text-slate-400">Chargement...</div>
+            <div className="p-8 sm:p-12 text-center text-slate-400">Chargement...</div>
           ) : filteredLeads.length === 0 ? (
-            <div className="p-12 text-center text-slate-400">
+            <div className="p-8 sm:p-12 text-center text-slate-400 text-sm">
               Aucun lead pour le moment. Les leads apparaîtront ici après les appels.
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
               {filteredLeads.map((lead) => (
-                <div key={lead.id} className="p-6 hover:bg-slate-50 transition-colors">
-                  <div className="flex items-start justify-between">
+                <div key={lead.id} className="p-4 sm:p-6 hover:bg-slate-50 transition-colors">
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-slate-800">{lead.caller_name}</h3>
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+                        <h3 className="font-semibold text-slate-800 text-sm sm:text-base">{lead.caller_name}</h3>
                         <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${statusColors[lead.status]}`}>
                           {lead.status}
                         </span>
@@ -179,40 +179,40 @@ export default function LeadsPage() {
                           </span>
                         )}
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                      <div className="grid grid-cols-2 gap-3 sm:gap-4 text-sm">
                         <div>
                           <p className="text-slate-400 text-xs">Téléphone</p>
-                          <p className="text-slate-700">{lead.phone_number}</p>
+                          <p className="text-slate-700 text-xs sm:text-sm">{lead.phone_number}</p>
                         </div>
                         <div>
                           <p className="text-slate-400 text-xs">Destination</p>
-                          <p className="text-slate-700">{lead.destination}</p>
+                          <p className="text-slate-700 text-xs sm:text-sm">{lead.destination}</p>
                         </div>
                         <div>
                           <p className="text-slate-400 text-xs">Type</p>
-                          <p className="text-slate-700">{tripTypeLabels[lead.trip_type] || lead.trip_type}</p>
+                          <p className="text-slate-700 text-xs sm:text-sm">{tripTypeLabels[lead.trip_type] || lead.trip_type}</p>
                         </div>
                         <div>
                           <p className="text-slate-400 text-xs">Budget</p>
-                          <p className="text-slate-700">{lead.budget_range ? budgetLabels[lead.budget_range] : '-'}</p>
+                          <p className="text-slate-700 text-xs sm:text-sm">{lead.budget_range ? budgetLabels[lead.budget_range] : '-'}</p>
                         </div>
                       </div>
                       {lead.travel_dates && (
-                        <p className="text-sm text-slate-500 mt-2">Dates: {lead.travel_dates}</p>
+                        <p className="text-xs sm:text-sm text-slate-500 mt-2">Dates: {lead.travel_dates}</p>
                       )}
                       {lead.notes && (
-                        <p className="text-sm text-slate-500 mt-1 italic">&quot;{lead.notes}&quot;</p>
+                        <p className="text-xs sm:text-sm text-slate-500 mt-1 italic">&quot;{lead.notes}&quot;</p>
                       )}
                       <p className="text-xs text-slate-400 mt-3">
                         {new Date(lead.created_at).toLocaleString('fr-CA')}
                         {lead.callback_time && ` • Rappeler: ${lead.callback_time}`}
                       </p>
                     </div>
-                    <div className="flex gap-2 ml-4">
+                    <div className="flex gap-2 sm:ml-4">
                       <select
                         value={lead.status}
                         onChange={(e) => updateStatus(lead.id, e.target.value)}
-                        className="text-sm border border-slate-200 rounded-lg px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                        className="text-xs sm:text-sm border border-slate-200 rounded-lg px-2 sm:px-3 py-1.5 bg-white text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500 w-full sm:w-auto"
                       >
                         <option value="new">Nouveau</option>
                         <option value="contacted">Contacté</option>

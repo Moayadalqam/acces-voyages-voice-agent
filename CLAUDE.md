@@ -68,17 +68,36 @@ Response target: <600ms
 Languages: French (primary), English
 ```
 
-## Project Structure
-
-```
-voice/
-├── access/
-│   └── proposal.html # Client proposal (Acces Voyages)
-└── mcp.json          # VAPI MCP server config
-```
-
 ## Business Targets
 
 - Capture 100% of after-hours inquiries
 - Reduce agent qualification time by 70%
 - 20+ new leads captured per month
+
+## Production Readiness Checklist
+
+- [x] Assistant created with correct configuration
+- [x] SMS tool attached
+- [x] Transfer call tool attached
+- [x] Lead capture tool attached
+- [x] API token secured (not hardcoded)
+- [x] System prompt version controlled (`prompts/sophie-system-prompt.md`)
+- [x] Documentation complete
+- [ ] Phone number configured (via VAPI dashboard)
+- [ ] Lead capture webhook endpoint configured (currently placeholder)
+- [ ] End-to-end call testing completed
+- [ ] Softvoyage CRM integration tested
+
+## Project Structure
+
+```
+voice/
+├── access/
+│   └── proposal.html      # Client proposal (Acces Voyages)
+├── prompts/
+│   └── sophie-system-prompt.md  # Version-controlled system prompt
+├── .env.example           # Environment variable template
+├── .gitignore
+├── CLAUDE.md              # This file
+└── mcp.json               # VAPI MCP server config
+```
